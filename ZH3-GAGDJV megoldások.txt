@@ -1,0 +1,24 @@
+ZH3-GAGDJV megoldások
+1. feladat mongoDB atlas
+{"languages.0":"English", "awards.wins":2}
+{title:1, writers:1, directors:1, year:1, _id:0}
+{year:-1}
+
+2. feladat Shell
+db.users.find({"email": {$regex: /.com/}}, {"name":1, "email":1})
+
+3. feladat Shell
+db.movies.aggregate([{$match: {"year": {$gt: 1950}}}, {$group: {_id:"$rated", atlag: {$avg:"$runtime"}}}])
+
+4. feladat Neo4j
+match (p:Person)-[:ACTED_IN]->(m:Movie)
+with m.title as cim, p.name as szereplo
+where m.released>1970 or m.title contains "Love"
+return cim, szereplo
+order by cim desc
+
+5. feladat Neo4j
+match (p:Person)-[ai:ACTED_IN]->(m:Movie)
+where p.born>1980
+with p.name as Actor, p.born as BirthYear, count(m.title) as NumMoviesActedIn
+return Actor, BirthYear, NumMoviesActedIn
